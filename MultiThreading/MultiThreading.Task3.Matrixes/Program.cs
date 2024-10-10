@@ -7,37 +7,66 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using MultiThreading.Task3.MatrixMultiplier.Matrices;
 using MultiThreading.Task3.MatrixMultiplier.Multipliers;
 
 namespace MultiThreading.Task3.MatrixMultiplier
 {
-    class Program
+    //class Program
+    //{
+    //    static void Main(string[] args)
+    //    {
+    //        Console.WriteLine("3.	Write a program, which multiplies two matrices and uses class Parallel. ");
+    //        Console.WriteLine();
+
+    //        const byte matrixSize = 7; // todo: use any number you like or enter from console
+    //        CreateAndProcessMatrices(matrixSize);
+    //        Console.ReadLine();
+    //    }
+
+    //    private static void CreateAndProcessMatrices(byte sizeOfMatrix)
+    //    {
+    //        Console.WriteLine("Multiplying...");
+    //        var firstMatrix = new Matrix(sizeOfMatrix, sizeOfMatrix);
+    //        var secondMatrix = new Matrix(sizeOfMatrix, sizeOfMatrix);
+
+    //        IMatrix resultMatrix = new MatricesMultiplier().Multiply(firstMatrix, secondMatrix);
+
+    //        Console.WriteLine("firstMatrix:");
+    //        firstMatrix.Print();
+    //        Console.WriteLine("secondMatrix:");
+    //        secondMatrix.Print();
+    //        Console.WriteLine("resultMatrix:");
+    //        resultMatrix.Print();
+    //    }
+    //}
+
+
+
+    class Bouquet
+    {
+        public required List<string> Flowers { get; init; }
+    }
+
+
+    internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("3.	Write a program, which multiplies two matrices and uses class Parallel. ");
-            Console.WriteLine();
+            List<Bouquet> bouquets =
+                [
+                    new Bouquet { Flowers = ["sunflower", "daisy", "daffodil", "larkspur"] },
+                    new Bouquet { Flowers = ["tulip", "rose", "orchid"] },
+                    new Bouquet { Flowers = ["gladiolis", "lily", "snapdragon", "aster", "protea"] },
+                    new Bouquet { Flowers = ["larkspur", "lilac", "iris", "dahlia"] }
+                ];
 
-            const byte matrixSize = 7; // todo: use any number you like or enter from console
-            CreateAndProcessMatrices(matrixSize);
-            Console.ReadLine();
-        }
-
-        private static void CreateAndProcessMatrices(byte sizeOfMatrix)
-        {
-            Console.WriteLine("Multiplying...");
-            var firstMatrix = new Matrix(sizeOfMatrix, sizeOfMatrix);
-            var secondMatrix = new Matrix(sizeOfMatrix, sizeOfMatrix);
-
-            IMatrix resultMatrix = new MatricesMultiplier().Multiply(firstMatrix, secondMatrix);
-
-            Console.WriteLine("firstMatrix:");
-            firstMatrix.Print();
-            Console.WriteLine("secondMatrix:");
-            secondMatrix.Print();
-            Console.WriteLine("resultMatrix:");
-            resultMatrix.Print();
+            IEnumerable<List<string>> query1 = bouquets.Select(bq => bq.Flowers);
+            Console.WriteLine(string.Join(",", query1));
+            IEnumerable<string> query2 = bouquets.SelectMany(bq => bq.Flowers);
+            Console.WriteLine(string.Join(",", query2));
         }
     }
 }
